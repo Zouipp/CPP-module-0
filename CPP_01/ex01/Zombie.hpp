@@ -13,18 +13,11 @@ class Zombie
 	public :
 	
 	~Zombie();
+	Zombie();
 	Zombie(std::string name);
-	
-	void announce(void)
-	{
-		std::cout << name << ":  BraiiiiiiinnnzzzZ..." << std::endl;
-	}
+	void set_name(std::string name);
+	void announce(void);
 };
 
-typedef struct s_zombie
-{
-	t_zombie *next;
-	Zombie *zombie;
-}	t_zombie;
 
-Zombie* zombieHorde( int N, std::string name );
+Zombie *zombieHorde( int N, std::string name );
