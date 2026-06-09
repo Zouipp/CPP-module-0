@@ -7,6 +7,8 @@ int main(int ac, char **av)
 	if (ac == 4)
 	{
 		paste = open_and_return_file(av[1], av[2], av[3]);
+		if (paste.empty())
+			return (1);
 		outfile += ".replace";
 		paste_in_file(outfile, paste);
 		std::cout << "Content has been paste." << std::endl;
