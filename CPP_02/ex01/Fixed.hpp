@@ -10,7 +10,9 @@ class Fixed
 	public :
 
 		Fixed();
+		Fixed(const int value);
 		Fixed(const Fixed &copy);
+		Fixed::Fixed(const float value);
 		Fixed &operator=(const Fixed &otherFixed);
 		~Fixed();
 		int getRawBits( void );
