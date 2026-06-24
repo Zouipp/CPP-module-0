@@ -1,8 +1,13 @@
 #include "Fixed.hpp"
 
-int32_t FloatToFixed(float value)
+int Fixed::toInt(void) const
 {
-	return int32_t(value * float(1 << 16) + (16 >= 0 ? 0.5 : -0.5));
+	return (this->value) >> nbits;
+}
+
+float Fixed::toFloat(void) const
+{
+	return float(this->value) / float(1 << nbits);
 }
 
 int Fixed::getRawBits( void )
@@ -26,13 +31,13 @@ Fixed::Fixed(void)
 Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called." << std::endl;
-	this->value
+	this->value = roundf(value * (1 << nbits));
 }
 
 Fixed::Fixed(const int value)
 {
 	std::cout << "Int constructor called." << std::endl;
-	this->value = value;
+	this->value = value * (1 << nbits);
 }
 
 Fixed::Fixed(const Fixed &copy)
@@ -54,4 +59,10 @@ Fixed &Fixed::operator=(const Fixed &otherFixed)
 		this->value = otherFixed.value;
 	}
 	return *this;
+}
+
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
+{
+	out << fixed.toFloat();
+	return out;
 }
