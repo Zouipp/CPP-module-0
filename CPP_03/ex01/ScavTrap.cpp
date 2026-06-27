@@ -1,4 +1,3 @@
-#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
 void ScavTrap::guardGate(void)
@@ -15,11 +14,17 @@ void ScavTrap::guardGate(void)
 	}
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::~ScavTrap(void)
+{
+	std::cout << "ScavTrap " << this->name << " has been destroyed !" << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "ScavTrap " << name << " has been created !" << std::endl;
 	this->name = name;
 	this->ad = 10;
 	this->mana = 5;
 	this->hp = 10;
+	this->gatemode = false;
 }

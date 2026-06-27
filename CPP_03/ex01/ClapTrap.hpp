@@ -1,6 +1,5 @@
 #include <string>
 #include <iostream>
-#include "ScavTrap.hpp"
 
 class ClapTrap
 {

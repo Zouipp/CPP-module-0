@@ -11,7 +11,7 @@ ClapTrap::ClapTrap(std::string name)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor has been called !" << std::endl;
+	std::cout << "ClapTrap " << this->name << " has been destroyed !" << std::endl;
 }
 
 void ClapTrap::attack(const std::string &target)
