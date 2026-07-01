@@ -1,10 +1,10 @@
 #include "animal.hpp"
 
-class Dog : protected Animal
+class Dog : public Animal
 {
 	public :
 		Dog();
-		~Dog(void);
+		~Dog();
 		void makeSound(void);
 		void getType(void);
 };

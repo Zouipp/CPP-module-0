@@ -5,10 +5,10 @@ void Animal::makeSound(void)
 	std::cout << this->type << " is making a sound !" << std::endl;
 }
 
-Animal::Animal(std::string type)
+Animal::Animal(void)
 {
 	std::cout << type << " is born !" << std::endl;
-	this->type = type;
+	this->type = "Animal";
 }
 
 Animal::~Animal(void)

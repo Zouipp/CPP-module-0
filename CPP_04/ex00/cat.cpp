@@ -1,6 +1,6 @@
 #include "cat.hpp"
 
-Cat::Cat(void) : Animal("Cat")
+Cat::Cat(void) : Animal()
 {
 	std::cout << "A cat is born !" << std::endl;
 	this->type = "Cat";

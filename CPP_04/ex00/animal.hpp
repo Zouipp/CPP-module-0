@@ -6,8 +6,8 @@ class Animal
 	protected :
 		std::string type;
 	public :
-		Animal(std::string type);
-		~Animal(void);
+		Animal();
+		~Animal();
 		void makeSound(void);
 		void getType(void);
 };

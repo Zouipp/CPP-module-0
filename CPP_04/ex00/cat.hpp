@@ -1,9 +1,9 @@
 #include "animal.hpp"
 
-class Cat : protected Animal
+class Cat : public Animal
 {
 	public :
 		Cat(void);
-		~Cat(void);
+		~Cat();
 		void makeSound(void);
 };
