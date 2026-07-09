@@ -11,7 +11,7 @@ Cat::~Cat(void)
 	std::cout << "A cat has passed away..." << std::endl;
 }
 
-void Cat::makeSound(void)
+void Cat::makeSound(void) const
 {
 	std::cout << "Meow !" << std::endl;
 }

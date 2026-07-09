@@ -1,3 +1,6 @@
+#ifndef CAT_HPP
+#define CAT_HPP
+
 #include "animal.hpp"
 
 class Cat : public Animal
@@ -5,5 +8,7 @@ class Cat : public Animal
 	public :
 		Cat(void);
 		~Cat();
-		void makeSound(void);
+		virtual  void makeSound(void) const;
 };
+
+#endif

@@ -1,5 +1,7 @@
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
+
+#include "idwtstwof.hpp"
 #include <iostream>
 #include <string>
 

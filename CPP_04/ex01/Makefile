@@ -1,9 +1,9 @@
-NAME	= Polymorphism
+NAME	= WorldOnFire
 
 CXX		= c++
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS	= main.cpp animal.cpp cat.cpp dog.cpp
+SRCS	= main.cpp animal.cpp cat.cpp dog.cpp idwtstwof.cpp
 OBJS	= $(SRCS:.cpp=.o)
 
 all: $(NAME)
