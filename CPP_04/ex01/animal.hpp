@@ -11,7 +11,7 @@ class Animal
 		std::string type;
 	public :
 		Animal();
-		~Animal();
+		virtual ~Animal();
 		virtual void makeSound(void) const;
 		std::string const & getType(void) const;
 };
