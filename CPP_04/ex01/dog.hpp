@@ -13,10 +13,10 @@ class Dog : public Animal
 		~Dog();
 		Dog(const Dog& other);
 		virtual void makeSound(void) const;
-		Dog& operator=(const Dog& other);
 		std::string getIdea(int index) const;
 		void setIdea(int index, std::string const & idea);
-
+		Dog& operator=(const Dog& other);
+		virtual void makeSound(void) const;
 };
 
 #endif

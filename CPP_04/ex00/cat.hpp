@@ -6,8 +6,10 @@
 class Cat : public Animal
 {
 	public :
-		Cat(void);
 		~Cat();
+		Cat(void);
+		Cat(const Cat& other);
+		Cat& operator=(const Cat& other);
 		virtual  void makeSound(void) const;
 };
 

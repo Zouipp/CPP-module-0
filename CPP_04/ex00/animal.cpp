@@ -20,3 +20,17 @@ std::string const & Animal::getType(void) const
 {
 	return this->type;
 }
+
+Animal::Animal(const Animal& other)
+{
+	std::cout << "Animal copy constructor called !" << std::endl;
+	this->type = other.type;
+}
+
+Animal& Animal::operator=(const Animal& other)
+{
+	std::cout << "Animal operator= called !" << std::endl;
+	if (this != &other)
+		this->type = other.type;
+	return *this;
+}
