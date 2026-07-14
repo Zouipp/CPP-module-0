@@ -3,20 +3,26 @@
 
 #include "Bureaucrat.hpp"
 
-class Form : public Bureaucrat
+class Form
 {
 	private :
 		const std::string name;
-		bool issigned = false;
+		bool issigned;
 		const int gsign;
 		const int gexe;
 	public :
-		Form(int grade, int gexe, int gsign);
 		~Form();
 		Form(const Form& other);
+		const std::string getName();
+		Form(int gsign, int gexe, std::string name);
 		Form& operator=(const Form& other);
-		void BeSinged(Bureaucrat bureaucrat);
+		void beSigned(Bureaucrat const & bureaucrat);
 		class GradeTooLowException : public std::exception
+		{
+			public :
+			const char* what() const throw();
+		};
+		class GradeTooHighException : public std::exception
 		{
 			public :
 			const char* what() const throw();

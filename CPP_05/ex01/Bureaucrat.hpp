@@ -4,14 +4,17 @@
 #include <string>
 #include <iostream>
 
+class Form;
+
 class Bureaucrat
 {
 	private :
 		const std::string name;
 		int grade;
 	public :
-		int getGrade() const;
+		void signForm(Form& form);
 		~Bureaucrat(void);
+		int getGrade() const;
 		void increaseGrade();
 		void decreaseGrade();
 		std::string getName() const;

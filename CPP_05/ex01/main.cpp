@@ -1,19 +1,22 @@
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 int main()
 {
-	std::cout << "----- Test 1: valid bureaucrat -----" << std::endl;
+	std::cout << "----- Test 1: valid Bureaucrat and Form -----" << std::endl;
 	try
 	{
-		Bureaucrat b1("Jean", 50);
-		std::cout << b1 << std::endl;
+		Bureaucrat boss("Boss", 10);
+		std::cout << boss << std::endl;
+
+		Form f1(20, 20, "Vacation Request");
+		std::cout << f1.getName() << std::endl;
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 2: grade too high (0) -----" << std::endl;
+	std::cout << "\n----- Test 2: Bureaucrat grade too high (0) -----" << std::endl;
 	try
 	{
 		Bureaucrat b2("Paul", 0);
@@ -24,7 +27,7 @@ int main()
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 3: grade too low (151) -----" << std::endl;
+	std::cout << "\n----- Test 3: Bureaucrat grade too low (151) -----" << std::endl;
 	try
 	{
 		Bureaucrat b3("Marie", 151);
@@ -35,68 +38,73 @@ int main()
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 4: boundaries (1 and 150) -----" << std::endl;
+	std::cout << "\n----- Test 4: beSigned() called directly, grade high enough -----" << std::endl;
 	try
 	{
-		Bureaucrat b4("Alice", 1);
-		Bureaucrat b5("Bob", 150);
-		std::cout << b4 << std::endl;
-		std::cout << b5 << std::endl;
+		Bureaucrat director("Director", 5);
+		Form f4(20, 20, "Budget Approval");
+		f4.beSigned(director);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 5: increaseGrade beyond limit -----" << std::endl;
+	std::cout << "\n----- Test 5: beSigned() called directly, grade too low -----" << std::endl;
 	try
 	{
-		Bureaucrat b6("Charlie", 1);
-		std::cout << b6 << std::endl;
-		b6.increaseGrade(); // should throw, grade already 1 (highest)
+		Bureaucrat intern("Intern", 100);
+		Form f5(5, 5, "Confidential Report");
+		f5.beSigned(intern);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 6: decreaseGrade beyond limit -----" << std::endl;
+	std::cout << "\n----- Test 6: Bureaucrat::signForm() success -----" << std::endl;
 	try
 	{
-		Bureaucrat b7("David", 150);
-		std::cout << b7 << std::endl;
-		b7.decreaseGrade(); // should throw, grade already 150 (lowest)
+		Bureaucrat manager("Manager", 15);
+		Form f6(30, 30, "Expense Report");
+		manager.signForm(f6);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 7: normal increase/decrease -----" << std::endl;
+	std::cout << "\n----- Test 7: Bureaucrat::signForm() failure -----" << std::endl;
 	try
 	{
-		Bureaucrat b8("Eve", 50);
-		std::cout << b8 << std::endl;
-		b8.increaseGrade();
-		std::cout << b8 << std::endl;
-		b8.decreaseGrade();
-		std::cout << b8 << std::endl;
+		Bureaucrat junior("Junior", 120);
+		Form f7(10, 10, "Top Secret");
+		junior.signForm(f7);
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 8: copy constructor & operator= -----" << std::endl;
+	std::cout << "\n----- Test 8: Form copy constructor -----" << std::endl;
 	try
 	{
-		Bureaucrat b9("Frank", 30);
-		Bureaucrat b10(b9); // copy constructor
-		std::cout << b10 << std::endl;
+		Form original(40, 40, "Original");
+		Form copy(original);
+		std::cout << copy.getName() << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "Error: " << e.what() << std::endl;
+	}
 
-		Bureaucrat b11("Grace", 60);
-		b11 = b9; // operator=, name of b11 should stay "Grace", grade becomes 30
-		std::cout << b11 << std::endl;
+	std::cout << "\n----- Test 9: Form operator= -----" << std::endl;
+	try
+	{
+		Form a(40, 40, "FormA");
+		Form b(60, 60, "FormB");
+		b = a;
+		std::cout << b.getName() << std::endl;
 	}
 	catch (std::exception& e)
 	{
