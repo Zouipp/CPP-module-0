@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Intern.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -9,83 +10,84 @@ int main(void)
 {
 	std::srand(static_cast<unsigned int>(time(NULL)));
 
-	std::cout << "----- Test 1: ShrubberyCreationForm, sign + execute success -----" << std::endl;
+	std::cout << "----- Test 1: Intern creates a RobotomyRequestForm -----" << std::endl;
 	try
 	{
-		Bureaucrat gardener("Gardener", 140);
-		ShrubberyCreationForm shrub("home");
+		Intern someRandomIntern;
+		AForm* rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
 
-		gardener.signForm(shrub);
-		gardener.executeForm(shrub);
+		if (rrf)
+		{
+			Bureaucrat surgeon("Surgeon", 40);
+			surgeon.signForm(*rrf);
+			surgeon.executeForm(*rrf);
+			delete rrf;
+		}
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 2: execute without signing (should fail) -----" << std::endl;
+	std::cout << "\n----- Test 2: Intern creates a ShrubberyCreationForm -----" << std::endl;
 	try
 	{
-		Bureaucrat gardener2("Gardener2", 140);
-		ShrubberyCreationForm shrub2("garden");
+		Intern someRandomIntern;
+		AForm* shrub = someRandomIntern.makeForm("ShrubberyCreationForm", "home");
 
-		gardener2.executeForm(shrub2); // not signed yet
+		if (shrub)
+		{
+			Bureaucrat gardener("Gardener", 100);
+			gardener.signForm(*shrub);
+			gardener.executeForm(*shrub);
+			delete shrub;
+		}
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 3: RobotomyRequestForm, sign + execute -----" << std::endl;
+	std::cout << "\n----- Test 3: Intern creates a PresidentialPardonForm -----" << std::endl;
 	try
 	{
-		Bureaucrat surgeon("Surgeon", 40);
-		RobotomyRequestForm robo("Bender");
+		Intern someRandomIntern;
+		AForm* pardon = someRandomIntern.makeForm("PresidentialPardonForm", "Fry");
 
-		surgeon.signForm(robo);
-		surgeon.executeForm(robo);
+		if (pardon)
+		{
+			Bureaucrat president("President", 3);
+			president.signForm(*pardon);
+			president.executeForm(*pardon);
+			delete pardon;
+		}
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 4: PresidentialPardonForm, sign + execute -----" << std::endl;
+	std::cout << "\n----- Test 4: Intern tries to create an invalid form name -----" << std::endl;
 	try
 	{
-		Bureaucrat president("President", 3);
-		PresidentialPardonForm pardon("Fry");
+		Intern someRandomIntern;
+		AForm* invalid = someRandomIntern.makeForm("BaguetteForm", "France");
 
-		president.signForm(pardon);
-		president.executeForm(pardon);
+		if (invalid)
+			delete invalid;
 	}
 	catch (std::exception& e)
 	{
 		std::cout << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n----- Test 5: sign fails, grade too low -----" << std::endl;
+	std::cout << "\n----- Test 5: Intern copy constructor & operator= -----" << std::endl;
 	try
 	{
-		Bureaucrat lowGrade("LowGrade", 150);
-		RobotomyRequestForm robo2("Zoidberg");
-
-		lowGrade.signForm(robo2); // grade 150 > required 72, should fail
-		lowGrade.executeForm(robo2); // should also fail, not signed
-	}
-	catch (std::exception& e)
-	{
-		std::cout << "Error: " << e.what() << std::endl;
-	}
-
-	std::cout << "\n----- Test 6: signed but grade too low to execute -----" << std::endl;
-	try
-	{
-		Bureaucrat justEnoughToSign("JustEnough", 25);
-		PresidentialPardonForm pardon2("Leela");
-
-		justEnoughToSign.signForm(pardon2); // sign requires 25, ok
-		justEnoughToSign.executeForm(pardon2); // execute requires 5, 25 is too low
+		Intern original;
+		Intern copy(original);
+		Intern assigned;
+		assigned = original;
 	}
 	catch (std::exception& e)
 	{
