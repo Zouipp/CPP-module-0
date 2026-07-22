@@ -1,10 +1,35 @@
 #include "Scalar.hpp"
-#include <cctype>
 
-void ScalarConverter::convert(std::string input)
+ScalarConverter::ScalarConverter(void)
+{
+	std::cout << "Default constructor called !" << std::endl;
+}
+
+ScalarConverter::~ScalarConverter(void)
+{
+	std::cout << "Default destructor called !" << std::endl;
+}
+
+ScalarConverter::ScalarConverter(const ScalarConverter& other)
+{
+	(void)other;
+	std::cout << "Default construcor called !" << std::endl;
+}
+
+ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
+{
+	(void)other;
+	std::cout << "Copy constructor called !" << std::endl;
+	return (*this);
+}
+
+void ScalarConverter::convert(const std::string input)
 {
 	if (input.length() == 0)
-		/*gestion d'erreur*/;
+	{
+		std::cout << "Unvalid input !" << std::endl;
+		return ;
+	}
 	else if (input.length() == 1)
 	{
 		if (isalpha(input[0]))
@@ -12,20 +37,27 @@ void ScalarConverter::convert(std::string input)
 		else if (isdigit(input[0]))
 			std::cout << "Int : " << input << std::endl;
 		else
-			/*gestion d'erreur*/;
+		{
+			std::cout << "Invalid input !" << std::endl;
+			return ;
+		}
 	}
-	else if (input == "-inff")
-		/*handle case*/;
-	else if (input == "+inff")
-		/*handle case*/;
-	else if (input == "nanf")
-		/*handle case*/;
 	else if (is_char(input))
-		exit ;
-	else if (is_float(input))
-		/*handle case*/;
+		return  ;
+	else if (isFloat(input))
+	{
+		std::cout << "Float : " << atof(input.c_str()) << std::endl;
+		return ;
+	}
+	else if (isDouble(input))
+	{
+		std::cout << "Double : " << strtod(input.c_str(), NULL) << std::endl;
+		return ;
+	}
 	else if (is_int(input))
-		/*handle case*/;
+		return ;
+	else
+		std::cout << "Invlid input !" << std::endl;
 }
 
 bool is_char(std::string input)
@@ -33,37 +65,27 @@ bool is_char(std::string input)
 	int i = 0;
 	while (input[i])
 	{
-		if (input[i] >= 7 && input[i] <= 32)
-			i++;
-		else if (input[i] == '\'')
+		if (input[i] == '\'')
 		{
 			if (input[i + 2] == '\'')
 			{
-				/*print en char (est ce que je dois traiter le cas 'c'akdsf )*/;
+				std::cout << "Char : " << input[i + 1] << std::endl;
 				return (true);
 			}
 			else
-			{
-				/*sortie d'erreur*/;
 				return (false);
-			}
 		}
-	}
-}
-
-bool is_float(std::string input)
-{
-	int i = 0;
-	while (input[i])
-	{
-		if (input[i] == '.')
-			break ;
 		i++;
 	}
-	if (i == input.length())
-		return (false);
-	std::cout << "Float : " << atof(input.c_str()) << std::endl;
-	return (true);
+	return (false);
+}
+
+bool isFloat(const std::string& input)
+{
+    return !input.empty() && input[input.size() - 1] == 'f' 
+           && (input.find('.') != std::string::npos 
+               || input.find("inf") != std::string::npos 
+               || input.find("nan") != std::string::npos);
 }
 
 bool is_int(std::string input)
@@ -76,12 +98,20 @@ bool is_int(std::string input)
 			i++;
 		if (input[i] != '0')
 			return (false);
+		else
+		{
+			std::cout << "Int : 0" << std::endl;
+			return (true);
+		}
 	}
-	std::cout << "Int : 0" << std::endl;
+	std::cout << "Int : " << res << std::endl;
 	return (true);
 }
 
-bool is_double(std::string input)
+bool isDouble(const std::string& input)
 {
-	
+    return !input.empty() && input[input.size() - 1] != 'f'
+           && (input.find('.') != std::string::npos
+               || input.find("inf") != std::string::npos
+               || input.find("nan") != std::string::npos);
 }
