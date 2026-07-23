@@ -32,7 +32,7 @@ void ScalarConverter::convert(const std::string input)
 	}
 	else if (input.length() == 1)
 	{
-		if (isalpha(input[0]))
+		if (isprint(input[0]) && !isdigit(input[0]))
 			std::cout << "Char : " << input << std::endl;
 		else if (isdigit(input[0]))
 			std::cout << "Int : " << input << std::endl;
@@ -84,12 +84,22 @@ bool isFloat(const std::string& input)
 {
     return !input.empty() && input[input.size() - 1] == 'f' 
            && (input.find('.') != std::string::npos 
-               || input.find("inf") != std::string::npos 
-               || input.find("nan") != std::string::npos);
+               || input.find("inff") != std::string::npos 
+               || input.find("nanf") != std::string::npos);
 }
 
 bool is_int(std::string input)
 {
+	int i = 0;
+	while (input[i])
+	{
+		if (!isdigit(input[i]) && input[i] != '+' && input[i] != '-' && input[i] != ' ')
+			return (false);
+		i++;
+	}
+	long long test = atoll(input.c_str());
+	if (test > 2147483647 || test < -2147483648)
+		return (false);
 	int res = atoi(input.c_str());
 	if (res == 0)
 	{
@@ -110,8 +120,5 @@ bool is_int(std::string input)
 
 bool isDouble(const std::string& input)
 {
-    return !input.empty() && input[input.size() - 1] != 'f'
-           && (input.find('.') != std::string::npos
-               || input.find("inf") != std::string::npos
-               || input.find("nan") != std::string::npos);
+    return input.find("inf") != std::string::npos || ((!input.empty() && (input[input.size() - 1] != 'f' && (input.find('.') != std::string::npos))) || input.find("nan") != std::string::npos);
 }
