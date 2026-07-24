@@ -1,3 +1,6 @@
+#ifndef SCALAR_HPP
+#define SCALAR_HPP
+
 #include <string>
 #include <cstdlib>
 #include <iostream>
@@ -17,3 +20,5 @@ bool	is_char(std::string input);
 bool	isFloat(const std::string& input);
 bool	is_int(std::string input);
 bool	isDouble(const std::string& input);
+
+#endif
