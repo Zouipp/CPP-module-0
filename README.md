@@ -23,6 +23,6 @@ Move from C to C++ by exploring the language's fundamentals: classes, memory man
 ## Build
 Each module is compiled independently with its own Makefile:
 ```bash
-cd moduleXX
+cd CPP_XX
 make
 ```
